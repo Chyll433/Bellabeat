@@ -8,14 +8,14 @@ the world. Collecting data on activity, sleep, stress, and reproductive health h
 knowledge about their own health and habits. Since it was founded in 2013, Bellabeat has grown rapidly and quickly positioned
 itself as a tech-driven wellness company for women.
 
-#Ask
+# Ask
 **Goal: To analyze smart device usage data in order to gain insight into how consumers use non-Bellabeat smart devices
 **
 1. What are some trends in smart device usage?
 2. How could these trends apply to Bellabeat customers?
 3. How could these trends help inuence Bellabeat marketing strategy?
 
-#Prepare
+# Prepare
 The dataset that is used for this case study is FitBit Fitness Tracker Data (CC0: Public Domain, dataset made available through Mobius). 
 
 **Evaluation:**
@@ -23,11 +23,12 @@ The dataset that is used for this case study is FitBit Fitness Tracker Data (CC0
 2. There aren't equal entries from every user, meaning that the dataset lacks information from some of its users which can lead to bias in some of the results
 3. There are only around 30 users who have contributed their FitBit data, hence it is a small sample size and might not give an accurate reflection of the general populace
 
-#Process
+# Process
 For this case study, data analysis and visualisation will be conducted in R
 
 **Import of datasets:**
 For this case study, the focus will be on the user's daily activities, sleep and weight 
+
 
 
 
