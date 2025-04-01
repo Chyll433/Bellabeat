@@ -57,18 +57,18 @@ colnames(daily_activity)
 colnames(sleep_day)
 colnames(weight_log)
 ```
+![image](https://github.com/user-attachments/assets/7ee2a1e0-b6c3-41ed-beee-07d1f9f755c2)
+
+
 
 Next, as there are many duplicate user ID in the data, we will identify how many distinct users there are for each dataset
 
 ```
-> #Identifying distinct values 
-> n_distinct(daily_activity$Id)
-[1] 33
-> n_distinct(sleep_day$Id)
-[1] 24
-> n_distinct(weight_log$Id)
-[1] 8
+n_distinct(daily_activity$Id)
+n_distinct(sleep_day$Id)
+n_distinct(weight_log$Id)
 ```
+
 
 From this, we can take note that the sample size is relatively small and hence have to be aware of possible biases that could possibly skew the data analysis
 
@@ -83,14 +83,6 @@ daily_activity %>%
          SedentaryMinutes,
         TotalSteps) %>% 
   summary()
-
- Calories    SedentaryMinutes   TotalSteps   
- Min.   :   0   Min.   :   0.0   Min.   :    0  
- 1st Qu.:1828   1st Qu.: 729.8   1st Qu.: 3790  
- Median :2134   Median :1057.5   Median : 7406  
- Mean   :2304   Mean   : 991.2   Mean   : 7638  
- 3rd Qu.:2793   3rd Qu.:1229.5   3rd Qu.:10727  
- Max.   :4900   Max.   :1440.0   Max.   :36019
 ```
 From the table, we can see that the mean total steps each day is 7638, which is lower than the World Health Organisation (WHO) recommended 10,000 steps per day
 
@@ -102,14 +94,6 @@ sleep_day %>%
          TotalMinutesAsleep,
          TotalTimeInBed) %>%
   summary()
-
- TotalSleepRecords TotalMinutesAsleep TotalTimeInBed 
- Min.   :1.000     Min.   : 58.0      Min.   : 61.0  
- 1st Qu.:1.000     1st Qu.:361.0      1st Qu.:403.0  
- Median :1.000     Median :433.0      Median :463.0  
- Mean   :1.119     Mean   :419.5      Mean   :458.6  
- 3rd Qu.:1.000     3rd Qu.:490.0      3rd Qu.:526.0  
- Max.   :3.000     Max.   :796.0      Max.   :961.0  
 ```
 3. The user's overall BMI
 
