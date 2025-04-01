@@ -57,10 +57,6 @@ colnames(daily_activity)
 colnames(sleep_day)
 colnames(weight_log)
 ```
-![image](https://github.com/user-attachments/assets/7ee2a1e0-b6c3-41ed-beee-07d1f9f755c2)
-
-
-
 Next, as there are many duplicate user ID in the data, we will identify how many distinct users there are for each dataset
 
 ```
@@ -68,7 +64,7 @@ n_distinct(daily_activity$Id)
 n_distinct(sleep_day$Id)
 n_distinct(weight_log$Id)
 ```
-
+![image](https://github.com/user-attachments/assets/7ee2a1e0-b6c3-41ed-beee-07d1f9f755c2)
 
 From this, we can take note that the sample size is relatively small and hence have to be aware of possible biases that could possibly skew the data analysis
 
@@ -81,10 +77,13 @@ To achieve the business objectives, we will mainly observe
 daily_activity %>%
   select(Calories,
          SedentaryMinutes,
-        TotalSteps) %>% 
+         TotalSteps) %>% 
   summary()
 ```
+![image](https://github.com/user-attachments/assets/234848f9-0790-4baf-b242-f0593b0096cf)
+
 From the table, we can see that the mean total steps each day is 7638, which is lower than the World Health Organisation (WHO) recommended 10,000 steps per day
+
 
 2. Total minutes asleep against the total time in bed
 
@@ -95,22 +94,32 @@ sleep_day %>%
          TotalTimeInBed) %>%
   summary()
 ```
+![image](https://github.com/user-attachments/assets/ebb6c8cb-a530-472b-ac31-ea74f1893f8a)
+
 3. The user's overall BMI
 
 ```
 weight_log %>%
   group_by(Id) %>%
   summarise(mean(BMI, na.rm=TRUE))
-
- Id `mean(BMI, na.rm = TRUE)`
-       <dbl>                     <dbl>
-1 1503960366                      22.6
-2 1927972279                      47.5
-3 2873212765                      21.6
-4 4319703577                      27.4
-5 4558609924                      27.2
-6 5577150313                      28  
-7 6962181067                      24.0
-8 8877689391                      25.5
 ```
-The mean weight between these 8 users is 27.975, which classifies most of them under the overweight category.
+![image](https://github.com/user-attachments/assets/d83f68ef-4a85-41fb-a9df-7f66b008bbc9)
+
+The mean BMI between these 8 users is 27.975, which classifies most of them under the overweight category.
+
+# Share
+
+Next, to observe the relationship between the sedentary minutes and total steps, we will plot a scatter graph with a best fit line.
+
+```
+ggplot(data=daily_activity, aes(x=TotalSteps, y= SedentaryMinutes))+geom_point()+geom_smooth()
+```
+
+![image](https://github.com/user-attachments/assets/99424d83-0d24-46b9-98b1-cdeeac2395a3)
+
+To observe the relationship between the total minutes asleep against the total time in bed, we will plot histogram.
+
+```
+ggplot(data=sleep_day, aes(x=TotalMinutesAsleep)) +geom_histogram(bins=60, na.rm=TRUE)
+```
+![image](https://github.com/user-attachments/assets/ddf463fc-6d61-45ca-97e7-d2e15d4d1849)
