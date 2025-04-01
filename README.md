@@ -29,6 +29,16 @@ For this case study, data analysis and visualisation will be conducted in R
 **Import of datasets:**
 For this case study, the focus will be on the user's daily activities, sleep and weight 
 
+''' 
+library(ggplot2)
+library(dplyr)
+library(tidyverse)
+
+daily_activity = read.csv("dailyActivity_merged.csv")
+sleep_day= read.csv("sleepDay_merged.csv")
+weight_log = read.csv("weightLogInfo_merged.csv")
+
+'''
 
 
 
