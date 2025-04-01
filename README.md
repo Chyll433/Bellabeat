@@ -69,9 +69,9 @@ n_distinct(weight_log$Id)
 From this, we can take note that the sample size is relatively small and hence have to be aware of possible biases that could possibly skew the data analysis
 
 # Analyze
-To achieve the business objectives, we will mainly observe 
+To achieve the business objectives, we will retrieve the summary of 
 
-1. The trend between sendentary minutes and total steps
+1. the sendentary minutes, total steps and calories in daily_activity
 
 ```
 daily_activity %>%
@@ -82,10 +82,11 @@ daily_activity %>%
 ```
 ![image](https://github.com/user-attachments/assets/234848f9-0790-4baf-b242-f0593b0096cf)
 
-From the table, we can see that the mean total steps each day is 7638, which is lower than the World Health Organisation (WHO) recommended 10,000 steps per day
+From the table, we can see that the mean total steps each day is 7638, which is lower than the World Health Organisation (WHO) recommended 10,000 steps per day.
+It also observed that the average calories lost per day were 2304.
+The average sedentary minutes spent per day was 991.2mins which is around 16.52h, this exceeds the recommended sedentary time which is around 8h per day.
 
-
-2. Total minutes asleep against the total time in bed
+2. the total sleep records, total minutes asleep and total time in bed in sleep_day
 
 ```
 sleep_day %>% 
@@ -96,20 +97,27 @@ sleep_day %>%
 ```
 ![image](https://github.com/user-attachments/assets/ebb6c8cb-a530-472b-ac31-ea74f1893f8a)
 
-3. The user's overall BMI
+From the table, we can observe that the mean sleep records is 1.119, which means that generally people take 1 nap per day.
+The mean total minutes asleep per day is 419.5mins per day which is converted to 6.99h per day. This means that these users are getting the recommended duration of 7-8h of sleep per day.
+The mean total time in bed per day is 458.6mins per day which is converted to 7.64h per day. Compared to the mean total minutes asleep per day, the mean total time in bed is longer meaning that a considerable amount of time spent in bed is conscious. 
+
+3. the weight, fat and BMI in weight_log
 
 ```
 weight_log %>%
-  group_by(Id) %>%
-  summarise(mean(BMI, na.rm=TRUE))
+  select(WeightKg,
+         Fat,
+         BMI) %>%
+  summary()
 ```
-![image](https://github.com/user-attachments/assets/d83f68ef-4a85-41fb-a9df-7f66b008bbc9)
+![image](https://github.com/user-attachments/assets/0c24151e-c759-4d15-a911-cd810131d2ec)
 
-The mean BMI between these 8 users is 27.975, which classifies most of them under the overweight category.
+From the table, we can observe that the mean weight of the users are 72.04kg, the mean body fat percentage is 23.50%, and the mean BMI is 25.19. 
+Since WHO categorises BMI >=25 as overweight, the users are relatively overweight.
 
 # Share
 
-Next, to observe the relationship between the sedentary minutes and total steps, we will plot a scatter graph with a best fit line.
+1. To observe the relationship between the sedentary minutes and total steps, we will plot a scatter graph with a best fit line.
 
 ```
 ggplot(data=daily_activity, aes(x=TotalSteps, y= SedentaryMinutes))+geom_point()+geom_smooth()
@@ -117,9 +125,28 @@ ggplot(data=daily_activity, aes(x=TotalSteps, y= SedentaryMinutes))+geom_point()
 
 ![image](https://github.com/user-attachments/assets/99424d83-0d24-46b9-98b1-cdeeac2395a3)
 
-To observe the relationship between the total minutes asleep against the total time in bed, we will plot histogram.
+There is a negative exponential relationship between the users' total steps and sedentary minutes.
+The graph is also skewed due to an outlier that exceeded the 30000 step count.
+
+2. To observe the relationship between the total minutes asleep against the total time in bed, we will plot a histogram.
 
 ```
 ggplot(data=sleep_day, aes(x=TotalMinutesAsleep)) +geom_histogram(bins=60, na.rm=TRUE)
 ```
 ![image](https://github.com/user-attachments/assets/ddf463fc-6d61-45ca-97e7-d2e15d4d1849)
+
+#From this graph, we can see the highest frequency of the user's sleeping duration is around the 400-550mins range, which is the recommended duration of sleep by WHO 
+#However there is still a cluster that falls below 400mins, meaning that a significant number of users are not getting enough sleep per day 
+
+# Act
+
+From the analysis of the Fitbit user's daily activity, sleep and weight, it can be concluded that many of the users do not practice a healthy and balanced lifestyle on a day-to-day basis. 
+Hence, Bellabeat can consider using its Bellabeat app to remind the user to be more active and lower their sedenetary minutes. 
+
+Bellabeat can also consider using its Leaf tracker to take note of the user's sleep schedule and recommend adjustments to their schedule if the user's sleeping habits are unhealthy. For example, the Leaf tracker can recommend an earlier sleeping time or alert the user of their sleeping habits.
+
+The Bellabeat app could also include a feature that allows users to key in their diets. Based on the user's BMI and body fat percentage, the app could recommend healthier meal suggestions or to remind the user to avoid unhealthy foods. 
+
+
+
+
